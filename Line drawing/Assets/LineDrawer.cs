@@ -5,8 +5,9 @@ public class LineDrawer : MonoBehaviour
     private LineRenderer lr;
     private EdgeCollider2D ed;
     public GameObject Line;
+    public GameObject[] stations;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    /*void Start()
     {
         
     }
@@ -14,6 +15,7 @@ public class LineDrawer : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        
         if (Input.GetMouseButtonDown(0))
         {
             makeLine();
@@ -36,5 +38,5 @@ public class LineDrawer : MonoBehaviour
         Vector2 start = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         lr.positionCount = 1;
         lr.SetPosition(0,start);
-    }
+    }*/
 }

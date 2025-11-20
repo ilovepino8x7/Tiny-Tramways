@@ -5,6 +5,7 @@ TagManager:
   serializedVersion: 3
   tags:
   - logos
+  - station
   layers:
   - Default
   - TransparentFX

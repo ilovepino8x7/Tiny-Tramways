@@ -439,6 +439,8 @@
 -analyzer:"/Applications/Unity/Unity.app/Contents/Tools/Unity.SourceGenerators/Unity.SourceGenerators.dll"
 -analyzer:"/Applications/Unity/Unity.app/Contents/Tools/Unity.SourceGenerators/Unity.UIToolkit.SourceGenerator.dll"
 "Assets/LineDrawer.cs"
+"Assets/lineScript.cs"
+"Assets/stationScript.cs"
 -langversion:9.0
 /deterministic
 /optimize+
