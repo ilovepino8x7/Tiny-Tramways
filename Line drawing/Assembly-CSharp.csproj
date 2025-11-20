@@ -48,7 +48,8 @@
     <Analyzer Include="/Applications/Unity/Unity.app/Contents/Tools/Unity.SourceGenerators/Unity.UIToolkit.SourceGenerator.dll" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets/LineDrawer.cs" />
+    <Compile Include="Assets/spawnPointScript.cs" />
+    <Compile Include="Assets/LogicManager.cs" />
     <Compile Include="Assets/stationScript.cs" />
     <Compile Include="Assets/lineScript.cs" />
   </ItemGroup>

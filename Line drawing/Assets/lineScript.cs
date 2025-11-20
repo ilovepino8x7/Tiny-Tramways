@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class lineScript : MonoBehaviour
 {
@@ -9,6 +10,7 @@ public class lineScript : MonoBehaviour
     private GameObject closest = null;
     [HideInInspector]
     public float maxDist;
+    private bool drawing = true;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -25,12 +27,33 @@ public class lineScript : MonoBehaviour
             Vector2[] points = { lr.GetPosition(0), lr.GetPosition(1) };
             ed.points = points;
         }
+        if (Input.GetMouseButton(0) && !drawing)
+        {
+            Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            Vector2 mouse2d = new Vector2(mousePos.x, mousePos.y);
+            Collider2D hit = Physics2D.OverlapCircle(mouse2d, 0.2f);
+            if (hit != null && hit.gameObject == transform.gameObject)
+            {
+                Destroy(transform.gameObject);
+            }
+        }
+        foreach (Touch touch in Input.touches)
+        {
+            Vector3 mousePos = Camera.main.ScreenToWorldPoint(touch.position);
+            Vector2 mouse2d = new Vector2(mousePos.x, mousePos.y);
+            Collider2D hit = Physics2D.OverlapCircle(mouse2d, 0.2f);
+            if (hit != null && hit.gameObject == transform.gameObject)
+            {
+                Destroy(transform.gameObject);
+            }
+        }
 
     }
     public void SetEnd()
     {
         if (closest != null)
         {
+            drawing = false;
             Vector2 end = closest.transform.position;
             lr.positionCount = 2;
             lr.SetPosition(1, end);
@@ -49,7 +72,7 @@ public class lineScript : MonoBehaviour
             if (other.gameObject.tag == "station" && other.gameObject != origin)
             {
                 Vector2 lineEnd = lr.GetPosition(lr.positionCount - 1);
-                if (Vector2.Distance(other.transform.position, lineEnd) <= Vector2.Distance(closest.transform.position, lineEnd))
+                if (Vector2.Distance(other.transform.position, origin.transform.position) <= Vector2.Distance(closest.transform.position, origin.transform.position))
                 {
                     closest = other.transform.gameObject;
                 }
@@ -64,4 +87,12 @@ public class lineScript : MonoBehaviour
             }
         }
     }
+    void OnTriggerExit2D(Collider2D other)
+    {
+        if (other.gameObject == closest)
+        {
+            closest = null;
+        }
+    }
+    
 }

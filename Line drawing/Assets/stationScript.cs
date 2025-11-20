@@ -6,12 +6,12 @@ public class stationScript : MonoBehaviour
     private LineRenderer lr;
     private EdgeCollider2D ed;
     public GameObject Line;
-    public LineDrawer ld;
+    public LogicManager ls;
     private GameObject closestToEnd;
     private bool drawing;
     private bool checking;
     private float maxDist = 1.5f;
-    public lineScript ls;
+    public lineScript lsc;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Update()
     {
@@ -32,18 +32,19 @@ public class stationScript : MonoBehaviour
         if (drawing)
         {
             drawing = false;
-            if (ls != null)
+            if (lsc != null)
             {
-                ls.SetEnd();
+                lsc.SetEnd();
             }
         }
     }
     private void makeLine()
     {
+
         GameObject line = Instantiate(Line);
-        ls = line.GetComponent<lineScript>();
-        ls.maxDist = maxDist;
-        ls.origin = transform.gameObject;
+        lsc = line.GetComponent<lineScript>();
+        lsc.maxDist = maxDist;
+        lsc.origin = transform.gameObject;
         lr = line.GetComponent<LineRenderer>();
         ed = line.GetComponent<EdgeCollider2D>();
         lr.positionCount = 0;
