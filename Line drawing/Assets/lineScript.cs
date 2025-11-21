@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -5,6 +7,8 @@ public class lineScript : MonoBehaviour
 {
     [HideInInspector]
     public GameObject origin;
+    [HideInInspector]
+    public Vector2[] path;
     private LineRenderer lr;
     private EdgeCollider2D ed;
     private GameObject closest = null;
@@ -12,6 +16,8 @@ public class lineScript : MonoBehaviour
     public float maxDist;
     private bool drawing = true;
     public LogicManager ls;
+    public GameObject train;
+    private List<GameObject> options = new List<GameObject>();
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -23,11 +29,18 @@ public class lineScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
-        if (lr.positionCount >= 2)
+        if (drawing)
         {
-            Vector2[] points = { lr.GetPosition(0), lr.GetPosition(1) };
-            ed.points = points;
+            SetClosest();
+            Vector3 cursor = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            Vector2 point2d = new Vector2(cursor.x, cursor.y);
+            lr.SetPosition(1,point2d);
+            ed.points = new Vector2[] {lr.GetPosition(0), lr.GetPosition(1)};
+        }
+
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            SpawnTrain();
         }
         if (Input.GetMouseButton(0) && !drawing && !ls.oneDrawing)
         {
@@ -49,12 +62,12 @@ public class lineScript : MonoBehaviour
                 Destroy(transform.gameObject);
             }
         }
-
     }
     public void SetEnd()
     {
         if (closest != null)
         {
+            origin.GetComponent<stationScript>().connected.Add(closest);
             drawing = false;
             Vector2 end = closest.transform.position;
             lr.positionCount = 2;
@@ -69,32 +82,56 @@ public class lineScript : MonoBehaviour
     }
     void OnTriggerStay2D(Collider2D other)
     {
-        if (closest != null)
+        if (other.gameObject.tag == "station" && !options.Contains(other.gameObject))
         {
-            if (other.gameObject.tag == "station" && other.gameObject != origin)
-            {
-                Vector2 lineEnd = lr.GetPosition(lr.positionCount - 1);
-                if (Vector2.Distance(other.transform.position, origin.transform.position) <= Vector2.Distance(closest.transform.position, origin.transform.position))
-                {
-                    closest = other.transform.gameObject;
-                }
+            options.Add(other.gameObject);
+        }
 
-            }
-        }
-        else
-        {
-            if (other.gameObject.tag == "station" && other.gameObject != origin)
-            {
-                closest = other.transform.gameObject;
-            }
-        }
     }
     void OnTriggerExit2D(Collider2D other)
     {
-        if (other.gameObject == closest)
+        if (other.gameObject.tag == "station" && options.Contains(other.gameObject))
         {
-            closest = null;
+            options.Remove(other.gameObject);
         }
     }
-    
+
+    public void SpawnTrain()
+    {
+        Vector2 direction = lr.GetPosition(1) - lr.GetPosition(0);
+        float ingle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+        if (ingle < 0)
+        {
+            ingle += 360;
+        }
+        Instantiate(train, transform.position, Quaternion.Euler(0, 0, ingle), transform);
+    }
+    private void SetClosest()
+    {
+        closest = null;
+        foreach (GameObject station in options)
+        { 
+            if (origin.GetComponent<stationScript>().connected.Contains(station)) 
+            { 
+                continue; 
+            }
+            if (station == origin)
+            {
+                continue;
+            }
+            else if (closest == null) 
+            { 
+                closest = station;
+            } 
+            else 
+            { 
+                if (Vector2.Distance(station.transform.position, origin.transform.position) <= Vector2.Distance(closest.transform.position, origin.transform.position)) 
+                { 
+                    closest = station; 
+                } 
+            } 
+        }
+    }
 }
+
+

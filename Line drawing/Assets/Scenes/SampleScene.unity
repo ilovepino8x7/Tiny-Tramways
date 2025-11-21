@@ -5406,6 +5406,7 @@ MonoBehaviour:
   - {fileID: 1394603407}
   - {fileID: 1027986013}
   station: {fileID: 5743236997092807201, guid: 08d5e137e156a4cc99b4724278a8f569, type: 3}
+  oneDrawing: 0
 --- !u!4 &1145097754
 Transform:
   m_ObjectHideFlags: 0
@@ -8188,7 +8189,7 @@ Camera:
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 2
-  m_BackGroundColor: {r: 1, g: 1, b: 1, a: 0}
+  m_BackGroundColor: {r: 0.6226415, g: 0.6226415, b: 0.6226415, a: 0}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
   m_FOVAxisMode: 0

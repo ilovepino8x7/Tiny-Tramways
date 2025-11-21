@@ -1,6 +1,7 @@
 using System.Security.Cryptography.X509Certificates;
 using Unity.VisualScripting;
 using UnityEngine;
+using System.Collections.Generic;
 
 public class stationScript : MonoBehaviour
 {
@@ -14,15 +15,14 @@ public class stationScript : MonoBehaviour
     private bool checking;
     private float maxDist = 1.5f;
     public lineScript lsc;
+    [HideInInspector]
+    public List<GameObject> connected = new List<GameObject>();
+    private bool firstLine = true;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Update()
     {
-        if (drawing && lr != null)
-        {
-            Vector2 mouse = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            lr.positionCount = 2;
-            lr.SetPosition(1, mouse);
-        }
+
+
     }
     void OnMouseDown()
     {
@@ -42,7 +42,6 @@ public class stationScript : MonoBehaviour
     }
     private void makeLine()
     {
-
         GameObject line = Instantiate(Line);
         lsc = line.GetComponent<lineScript>();
         lsc.maxDist = maxDist;
@@ -51,8 +50,10 @@ public class stationScript : MonoBehaviour
         ed = line.GetComponent<EdgeCollider2D>();
         lr.positionCount = 0;
         Vector2 start = transform.position;
-        lr.positionCount = 1;
+        lr.positionCount = 2;
         lr.SetPosition(0, start);
+        Vector2 offset = start + new Vector2(0.4f, 0);
+        lr.SetPosition(1, offset);
     }
 
 }
