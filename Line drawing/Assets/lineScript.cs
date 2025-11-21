@@ -11,10 +11,12 @@ public class lineScript : MonoBehaviour
     [HideInInspector]
     public float maxDist;
     private bool drawing = true;
+    public LogicManager ls;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         lr = GetComponent<LineRenderer>();
+        ls = GameObject.FindWithTag("logos").GetComponent<LogicManager>();
         ed = GetComponent<EdgeCollider2D>();
     }
 
@@ -27,7 +29,7 @@ public class lineScript : MonoBehaviour
             Vector2[] points = { lr.GetPosition(0), lr.GetPosition(1) };
             ed.points = points;
         }
-        if (Input.GetMouseButton(0) && !drawing)
+        if (Input.GetMouseButton(0) && !drawing && !ls.oneDrawing)
         {
             Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             Vector2 mouse2d = new Vector2(mousePos.x, mousePos.y);

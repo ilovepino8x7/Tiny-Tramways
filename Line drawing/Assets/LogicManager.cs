@@ -9,6 +9,8 @@ public class LogicManager : MonoBehaviour
     public Transform[] spawns;
     private int choice = 0;
     public GameObject station;
+    [HideInInspector]
+    public bool oneDrawing;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -22,6 +24,7 @@ public class LogicManager : MonoBehaviour
         {
             makeStation();
         }
+        checkDrawing();
     }
     private void makeStation()
     {
@@ -34,6 +37,19 @@ public class LogicManager : MonoBehaviour
         else
         {
             makeStation();
+        }
+    }
+    private void checkDrawing()
+    {
+        oneDrawing = false;
+        GameObject[] stations = GameObject.FindGameObjectsWithTag("station");
+        foreach(GameObject station in stations)
+        {
+            if (station.GetComponent<stationScript>().drawing == true)
+            {
+                oneDrawing = true;
+                return;
+            }
         }
     }
     

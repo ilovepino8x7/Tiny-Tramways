@@ -1,3 +1,4 @@
+using System.Security.Cryptography.X509Certificates;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -8,7 +9,8 @@ public class stationScript : MonoBehaviour
     public GameObject Line;
     public LogicManager ls;
     private GameObject closestToEnd;
-    private bool drawing;
+    [HideInInspector]
+    public bool drawing;
     private bool checking;
     private float maxDist = 1.5f;
     public lineScript lsc;
