@@ -17,7 +17,8 @@ public class stationScript : MonoBehaviour
     public lineScript lsc;
     [HideInInspector]
     public List<GameObject> connected = new List<GameObject>();
-    private bool firstLine = true;
+    [HideInInspector]
+    private int passengers = 8;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Update()
     {
@@ -54,6 +55,10 @@ public class stationScript : MonoBehaviour
         lr.SetPosition(0, start);
         Vector2 offset = start + new Vector2(0.4f, 0);
         lr.SetPosition(1, offset);
+    }
+    public int GetPassengers()
+    {
+        return passengers;
     }
 
 }

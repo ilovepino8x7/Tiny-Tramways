@@ -105,6 +105,8 @@ MonoBehaviour:
   ls: {fileID: 0}
   drawing: 0
   lsc: {fileID: 0}
+  connected: []
+  passengers: 0
 --- !u!58 &8004215487141643154
 CircleCollider2D:
   m_ObjectHideFlags: 0

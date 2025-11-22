@@ -440,6 +440,7 @@
 -analyzer:"/Applications/Unity/Unity.app/Contents/Tools/Unity.SourceGenerators/Unity.UIToolkit.SourceGenerator.dll"
 "Assets/lineScript.cs"
 "Assets/LogicManager.cs"
+"Assets/newTrain.cs"
 "Assets/spawnPointScript.cs"
 "Assets/stationScript.cs"
 "Assets/trainMovement.cs"

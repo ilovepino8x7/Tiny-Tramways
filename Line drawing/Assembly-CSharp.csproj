@@ -42,7 +42,7 @@
     <UnityVersion>6000.0.46f1</UnityVersion>
   </PropertyGroup>
   <ItemGroup>
-    <Analyzer Include="/Users/Tedski/.vscode/extensions/visualstudiotoolsforunity.vstuc-1.1.3/Analyzers/Microsoft.Unity.Analyzers.dll" />
+    <Analyzer Include="/Users/Tedski/.vscode/extensions/visualstudiotoolsforunity.vstuc-1.2.0/Analyzers/Microsoft.Unity.Analyzers.dll" />
     <Analyzer Include="/Applications/Unity/Unity.app/Contents/Tools/Unity.SourceGenerators/Unity.SourceGenerators.dll" />
     <Analyzer Include="/Applications/Unity/Unity.app/Contents/Tools/Unity.SourceGenerators/Unity.Properties.SourceGenerator.dll" />
     <Analyzer Include="/Applications/Unity/Unity.app/Contents/Tools/Unity.SourceGenerators/Unity.UIToolkit.SourceGenerator.dll" />
@@ -53,6 +53,7 @@
     <Compile Include="Assets/LogicManager.cs" />
     <Compile Include="Assets/stationScript.cs" />
     <Compile Include="Assets/lineScript.cs" />
+    <Compile Include="Assets/newTrain.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">

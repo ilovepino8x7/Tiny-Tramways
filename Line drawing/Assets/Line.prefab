@@ -79,7 +79,7 @@ LineRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: -1
   m_Positions: []
   m_Parameters:
     serializedVersion: 3
@@ -197,7 +197,7 @@ MonoBehaviour:
   path: []
   maxDist: 0
   ls: {fileID: 0}
-  train: {fileID: 2047112307390185776, guid: 4df6ddb1ea2a6428480802e9c9d7c201, type: 3}
+  train: {fileID: 7064879866762816405, guid: 3dfad216d1a1744e99995b0fbab07af6, type: 3}
 --- !u!50 &8642533413389062196
 Rigidbody2D:
   serializedVersion: 5
