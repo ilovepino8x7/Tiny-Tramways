@@ -6,6 +6,7 @@ TagManager:
   tags:
   - logos
   - station
+  - lino
   layers:
   - Default
   - TransparentFX

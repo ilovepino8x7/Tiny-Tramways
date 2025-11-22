@@ -40,10 +40,7 @@ public class lineScript : MonoBehaviour
             ed.points = new Vector2[] { lr.GetPosition(0), lr.GetPosition(1) };
         }
 
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            SpawnTrain();
-        }
+        
         if (Input.GetMouseButton(0) && !drawing && !ls.oneDrawing)
         {
             Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);

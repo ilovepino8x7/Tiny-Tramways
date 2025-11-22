@@ -49,7 +49,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets/spawnPointScript.cs" />
-    <Compile Include="Assets/trainMovement.cs" />
     <Compile Include="Assets/LogicManager.cs" />
     <Compile Include="Assets/stationScript.cs" />
     <Compile Include="Assets/lineScript.cs" />

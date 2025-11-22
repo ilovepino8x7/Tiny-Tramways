@@ -33,6 +33,7 @@ public class stationScript : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        ls = GameObject.FindWithTag("logos").GetComponent<LogicManager>();
         pass = transform.GetChild(1).GetChild(0).gameObject.GetComponent<TMP_Text>();
         passengers = new List<GameObject>();
         if (GetComponent<SpriteRenderer>().color == Color.red)
@@ -46,6 +47,10 @@ public class stationScript : MonoBehaviour
     }
     void Update()
     {
+        if (passengers.Count >= 8)
+        {
+            ls.EndGame();
+        }
         if (!spawning && passengers.Count <= 7)
         {
             spawning = true;

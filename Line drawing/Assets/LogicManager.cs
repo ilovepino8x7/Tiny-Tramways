@@ -1,5 +1,6 @@
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class LogicManager : MonoBehaviour
 {
@@ -17,17 +18,25 @@ public class LogicManager : MonoBehaviour
     public int journeys = 0;
     public TMP_Text jtext;
     private bool spawning = false;
-
+    public GameObject start;
+    private bool started = false;
+    private bool done = false;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        makeStation();
-        makeStation();
+        start.SetActive(true);
+        
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (started && !done)
+        {
+            done = true;
+            makeStation();
+            makeStation();
+        }
         if (!spawning)
         {
             spawning = true;
@@ -108,5 +117,21 @@ public class LogicManager : MonoBehaviour
             }
         }
     }
-
+    public void StartGame()
+    {
+        start.SetActive(false);
+        started = true;
+    }
+    public void EndGame()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    }
+    public void SpawnTrains()
+    {
+        GameObject[] lines = GameObject.FindGameObjectsWithTag("lino");
+        foreach (GameObject line in lines)
+        {
+            line.GetComponent<lineScript>().SpawnTrain();
+        }
+    }
 }
