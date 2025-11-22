@@ -111,13 +111,10 @@ public class lineScript : MonoBehaviour
             {
                 ingle += 360;
             }
-            train.GetComponent<newTrain>().line = transform.gameObject;
-            train.GetComponent<newTrain>().station1 = origin;
-            train.GetComponent<newTrain>().station2 = endd;
-            Instantiate(train, transform.position, Quaternion.Euler(0, 0, ingle));
-            train.GetComponent<newTrain>().line = transform.gameObject;
-            train.GetComponent<newTrain>().station1 = origin;
-            train.GetComponent<newTrain>().station2 = endd;
+            GameObject entrain = Instantiate(train, transform.position, Quaternion.Euler(0, 0, ingle));
+            entrain.GetComponent<newTrain>().line = transform.gameObject;
+            entrain.GetComponent<newTrain>().station1 = origin;
+            entrain.GetComponent<newTrain>().station2 = endd;
         }
     }
     private void SetClosest()

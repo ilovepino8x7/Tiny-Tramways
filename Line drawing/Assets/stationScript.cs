@@ -2,6 +2,8 @@ using System.Security.Cryptography.X509Certificates;
 using Unity.VisualScripting;
 using UnityEngine;
 using System.Collections.Generic;
+using System.Collections;
+using TMPro;
 
 public class stationScript : MonoBehaviour
 {
@@ -18,11 +20,21 @@ public class stationScript : MonoBehaviour
     [HideInInspector]
     public List<GameObject> connected = new List<GameObject>();
     [HideInInspector]
-    private int passengers = 8;
-    private int colour = 0;
+    private List<GameObject> passengers;
+    [HideInInspector]
+    public int colour = 0;
+    [HideInInspector]
+    public int red = 5;
+    [HideInInspector]
+    public int green = 3;
+    public GameObject passenger;
+    private bool spawning = false;
+    public TMP_Text pass;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        pass = transform.GetChild(1).GetChild(0).gameObject.GetComponent<TMP_Text>();
+        passengers = new List<GameObject>();
         if (GetComponent<SpriteRenderer>().color == Color.red)
         {
             colour = 0;
@@ -34,8 +46,12 @@ public class stationScript : MonoBehaviour
     }
     void Update()
     {
-
-
+        if (!spawning && passengers.Count <= 7)
+        {
+            spawning = true;
+            Invoke(nameof(spawnPassenger), 6);
+        }
+        pass.text = passengers.Count.ToString();
     }
     void OnMouseDown()
     {
@@ -68,9 +84,37 @@ public class stationScript : MonoBehaviour
         Vector2 offset = start + new Vector2(0.4f, 0);
         lr.SetPosition(1, offset);
     }
-    public int GetPassengers()
+    public List<GameObject> GetPassengers()
     {
         return passengers;
     }
+    public void GivePassengers()
+    {
+        passengers.Clear();
+    }
 
+    private void spawnPassenger()
+    {
+        GameObject p = Instantiate(passenger, transform.position, Quaternion.identity);
+        if (Random.Range(0, 2) == 0)
+        {
+            p.GetComponent<SpriteRenderer>().color = Color.red;
+            p.GetComponent<passengerControl>().colour = 0;
+        }
+        else
+        {
+            p.GetComponent<SpriteRenderer>().color = Color.green;
+            p.GetComponent<passengerControl>().colour = 1;
+        }
+        if (p.GetComponent<passengerControl>().colour == 0)
+        {
+            p.transform.position = new Vector2(transform.position.x - 0.2f, transform.position.y);
+        }
+        else
+        {
+            p.transform.position = new Vector2(transform.position.x + 0.2f, transform.position.y);
+        }
+        passengers.Add(p);
+        spawning = false;
+    }
 }

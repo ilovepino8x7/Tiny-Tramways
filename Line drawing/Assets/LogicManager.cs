@@ -1,3 +1,4 @@
+using TMPro;
 using UnityEngine;
 
 public class LogicManager : MonoBehaviour
@@ -12,20 +13,28 @@ public class LogicManager : MonoBehaviour
     [HideInInspector]
     public bool oneDrawing;
     private int stationCount = 0;
+    [HideInInspector]
+    public int journeys = 0;
+    public TMP_Text jtext;
+    private bool spawning = false;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-
+        makeStation();
+        makeStation();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.LeftCommand))
+        if (!spawning)
         {
-            makeStation();
+            spawning = true;
+            Invoke(nameof(makeStation), 8);
         }
         checkDrawing();
+        jtext.text = journeys.ToString();
     }
     private void makeStation()
     {
@@ -36,6 +45,7 @@ public class LogicManager : MonoBehaviour
             {
                 GameObject newStat = Instantiate(station, spawns[choice].position, Quaternion.identity);
                 newStat.GetComponent<SpriteRenderer>().color = Color.red;
+                newStat.transform.GetChild(1).GetComponent<Canvas>().worldCamera = GameObject.FindWithTag("MainCamera").GetComponent<Camera>();
                 stationCount++;
                 spawns[choice].GetComponent<spawnPointScript>().occupied = true;
             }
@@ -51,6 +61,7 @@ public class LogicManager : MonoBehaviour
             {
                 GameObject newStat = Instantiate(station, spawns[choice].position, Quaternion.identity);
                 newStat.GetComponent<SpriteRenderer>().color = Color.green;
+                newStat.transform.GetChild(1).GetComponent<Canvas>().worldCamera = GameObject.FindWithTag("MainCamera").GetComponent<Camera>();
                 stationCount++;
                 spawns[choice].GetComponent<spawnPointScript>().occupied = true;
             }
@@ -65,6 +76,7 @@ public class LogicManager : MonoBehaviour
             if (spawns[choice].GetComponent<spawnPointScript>().occupied == false)
             {
                 GameObject newStat = Instantiate(station, spawns[choice].position, Quaternion.identity);
+                newStat.transform.GetChild(1).GetComponent<Canvas>().worldCamera = GameObject.FindWithTag("MainCamera").GetComponent<Camera>();
                 if (Random.Range(0,2) == 0)
                 {
                     newStat.GetComponent<SpriteRenderer>().color = Color.red;
@@ -81,6 +93,7 @@ public class LogicManager : MonoBehaviour
                 makeStation();
             }
         }
+        spawning = false;
     }
     private void checkDrawing()
     {
