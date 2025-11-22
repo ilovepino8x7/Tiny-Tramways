@@ -19,7 +19,19 @@ public class stationScript : MonoBehaviour
     public List<GameObject> connected = new List<GameObject>();
     [HideInInspector]
     private int passengers = 8;
+    private int colour = 0;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
+    void Start()
+    {
+        if (GetComponent<SpriteRenderer>().color == Color.red)
+        {
+            colour = 0;
+        }
+        else
+        {
+            colour = 1;
+        }
+    }
     void Update()
     {
 

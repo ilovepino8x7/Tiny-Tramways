@@ -6,6 +6,8 @@ public class newTrain : MonoBehaviour
     private bool going = true;
     private bool collecting = false;
     private int holding;
+    private int red;
+    private int green;
     public GameObject line;
     public GameObject station1; // path[0]
     public GameObject station2; // path[1]
