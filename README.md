@@ -2,6 +2,7 @@
 
 ## About
 Tiny Tramways is a (WIP) strategy game inspired by _Mini Motorways_ where you connect up tram stations with lines to create a transport **FRAMEWORK**.
+​Connect stations by dragging from one to another. Green passengers want to go to green stations and red to red, so connecting green and red stations is vital. Press spawn trains to spawn trams, and remove lines by swiping across them (may cause error, just close developer panel). If any stations have more than 8 passengers waiting for a tram, the game restarts.
 
 ## Link to Play online
 For PC or Mac
